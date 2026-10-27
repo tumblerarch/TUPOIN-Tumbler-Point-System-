@@ -76,7 +76,7 @@
       <!-- SCREEN 2: VERIFIKASI UNGGAH FOTO & STEMPEL URUT -->
       <section id="screen-2" class="screen-view p-6">
         <button onclick="goToScreen(1)" class="text-emerald-700 hover:text-emerald-900 mb-4 inline-flex items-center gap-1 text-sm font-semibold">
-          <i class="fa-solid fa-chevron-left"></i> Kembali
+          <i class="fa-solid fa-chevron-left"></i> Ganti Profil / Kembali
         </button>
 
         <h2 class="text-xl font-bold text-slate-800 mb-1">Verifikasi Pembelian</h2>
@@ -146,7 +146,7 @@
         <h2 class="text-3xl font-extrabold text-emerald-900 mb-1">Yeay!</h2>
         <p class="text-lg font-semibold text-slate-700 mb-6">Kamu mendapatkan <span class="text-amber-500 font-bold">+10 Koin</span></p>
 
-        <!-- Bagian Tampilan Stiker Lucu (Diperbarui dengan Ikon SVG & Emoji HD Stabil) -->
+        <!-- Bagian Tampilan Stiker Lucu -->
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 w-full mb-6">
           <p class="text-xs font-bold text-slate-700 mb-3">Stiker Lucu Baru Didapatkan!</p>
           
@@ -183,7 +183,9 @@
             <h3 id="display-name" class="font-bold text-sm text-slate-800">-</h3>
             <p id="display-nim" class="text-xs text-slate-500">NIM -</p>
           </div>
-          <button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-gear"></i></button>
+          <button onclick="goToScreen(1)" title="Ganti Akun" class="text-emerald-700 hover:text-emerald-900 text-xs font-semibold bg-emerald-50 px-2.5 py-1.5 rounded-lg border border-emerald-200">
+            <i class="fa-solid fa-right-from-bracket mr-1"></i>Ganti
+          </button>
         </div>
 
         <!-- Total Koin Box (Max 50 Poin) -->
@@ -349,19 +351,19 @@
   </div>
 
   <script>
-    // Membaca State Tersimpan dari LocalStorage HP
+    // Data Pengguna Aktif
+    let currentUserKey = "";
     let userData = {
-      name: localStorage.getItem('tupoin_name') || "",
-      nim: localStorage.getItem('tupoin_nim') || "",
-      coins: parseInt(localStorage.getItem('tupoin_coins')) || 0,
-      claimedCount: parseInt(localStorage.getItem('tupoin_claimed_count')) || 0,
+      name: "",
+      nim: "",
+      coins: 0,
+      claimedCount: 0,
       selectedStamp: 1,
       hasUploadedTumbler: false,
       hasUploadedCard: false,
-      history: JSON.parse(localStorage.getItem('tupoin_history')) || []
+      history: []
     };
 
-    // Set Tanggal Kedaluwarsa Kupon (+1 Bulan)
     function setupExpiryDate() {
       const today = new Date();
       today.setMonth(today.getMonth() + 1);
@@ -370,13 +372,41 @@
     }
     setupExpiryDate();
 
-    // Inisialisasi Tampilan
     window.onload = function() {
-      updateStampButtonsUI();
-      updateDashboardUI();
+      // Saat awal buka, form dalam keadaan kosong
     };
 
-    // Fungsi Reset Form Upload Foto Agar Selalu Mandiri Dipilih Baru
+    // Fungsi menyimpan data khusus milik pengguna aktif berdasarkan NIM
+    function saveCurrentUserData() {
+      if (!currentUserKey) return;
+      const dataToSave = {
+        name: userData.name,
+        nim: userData.nim,
+        coins: userData.coins,
+        claimedCount: userData.claimedCount,
+        history: userData.history
+      };
+      localStorage.setItem(currentUserKey, JSON.stringify(dataToSave));
+    }
+
+    // Fungsi memuat data unik pengguna berdasarkan Nama + NIM
+    function loadUserData(nim) {
+      currentUserKey = `tupoin_user_${nim}`;
+      const saved = localStorage.getItem(currentUserKey);
+      
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        userData.coins = parsed.coins || 0;
+        userData.claimedCount = parsed.claimedCount || 0;
+        userData.history = parsed.history || [];
+      } else {
+        // Pengguna baru di HP ini -> Poin mulai dari 0 dan stempel dari 1
+        userData.coins = 0;
+        userData.claimedCount = 0;
+        userData.history = [];
+      }
+    }
+
     function resetUploadFields() {
       userData.hasUploadedTumbler = false;
       userData.hasUploadedCard = false;
@@ -424,17 +454,18 @@
       userData.name = nameInput;
       userData.nim = nimInput;
 
-      localStorage.setItem('tupoin_name', userData.name);
-      localStorage.setItem('tupoin_nim', userData.nim);
+      // Muat data khusus sesuai NIM unik
+      loadUserData(nimInput);
 
       document.getElementById('display-name').innerText = userData.name;
       document.getElementById('display-nim').innerText = "NIM " + userData.nim;
 
       updateStampButtonsUI();
+      updateDashboardUI();
       goToScreen(2);
     }
 
-    // Update Tombol Stempel Berdasarkan Urutan Pembelian (1 s/d 5)
+    // Update Tombol Stempel Berdasarkan Urutan Pembelian Unik User
     function updateStampButtonsUI() {
       const nextStampNumber = userData.claimedCount + 1;
       const msgEl = document.getElementById('stamp-info-msg');
@@ -464,7 +495,6 @@
       }
     }
 
-    // Preview Foto Tumbler Asli
     function previewTumblerImage(event) {
       const file = event.target.files[0];
       if (file) {
@@ -481,7 +511,6 @@
       }
     }
 
-    // Preview Foto Card Stempel Fisik Kantin
     function previewCardImage(event) {
       const file = event.target.files[0];
       if (file) {
@@ -502,7 +531,7 @@
       userData.selectedStamp = num;
     }
 
-    // Verifikasi & Tambah Poin (+10 Poin)
+    // Verifikasi & Tambah Poin
     function processVerification() {
       let valid = true;
 
@@ -526,9 +555,6 @@
       userData.coins = Math.min(50, userData.coins + 10);
       userData.claimedCount += 1;
 
-      localStorage.setItem('tupoin_coins', userData.coins);
-      localStorage.setItem('tupoin_claimed_count', userData.claimedCount);
-
       const now = new Date();
       const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
       userData.history.unshift({
@@ -536,7 +562,9 @@
         points: "+10 Koin",
         time: timeString
       });
-      localStorage.setItem('tupoin_history', JSON.stringify(userData.history));
+
+      // Simpan data unik milik user ini
+      saveCurrentUserData();
 
       updateStampButtonsUI();
       updateDashboardUI();
@@ -550,7 +578,6 @@
       goToScreen(3);
     }
 
-    // Update Tampilan Beranda & Poin
     function updateDashboardUI() {
       const coinCountEl = document.getElementById('coin-count');
       const progressBarEl = document.getElementById('progress-bar');
@@ -576,6 +603,8 @@
             <span class="font-bold ${item.points.includes('+') ? 'text-emerald-600' : 'text-amber-600'} text-xs">${item.points}</span>
           </div>
         `).join('');
+      } else {
+        historyListEl.innerHTML = `<p class="text-slate-400 text-center py-4">Belum ada riwayat transaksi.</p>`;
       }
 
       if (userData.coins >= 50) {
@@ -594,24 +623,20 @@
       }
     }
 
-    // Penukaran Kupon (Langsung Ditunjukkan)
     function useCoupon() {
       if (confirm("Apakah Anda yakin ingin menunjukkan & menukarkan kupon ini ke pedagang?")) {
         alert("Kupon berhasil diverifikasi oleh pedagang! Selamat menikmati minuman gratis kamu 🎉\n\nSistem stempel kamu telah di-reset kembali ke Nomor 1 untuk siklus berikutnya.");
         
         userData.coins = 0;
         userData.claimedCount = 0;
-        
-        localStorage.setItem('tupoin_coins', 0);
-        localStorage.setItem('tupoin_claimed_count', 0);
 
         userData.history.unshift({
           title: "Penukaran Kupon Gratis",
           points: "-50 Koin",
           time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
         });
-        localStorage.setItem('tupoin_history', JSON.stringify(userData.history));
 
+        saveCurrentUserData();
         updateStampButtonsUI();
         updateDashboardUI();
         goToScreen(4);

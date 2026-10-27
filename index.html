@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TUPOIN - Loyalty Rewards Tumbler Kampus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0fdf4;
+    }
+    .screen-view {
+      display: none;
+    }
+    .screen-view.active {
+      display: block;
+    }
+    .custom-shadow {
+      box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1), 0 8px 10px -6px rgba(16, 185, 129, 0.1);
+    }
+  </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-slate-100 p-0 sm:p-4">
+
+  <!-- Mobile Container Wrapper -->
+  <div class="w-full max-w-md bg-white min-h-screen sm:min-h-[844px] sm:h-[844px] sm:rounded-[40px] shadow-2xl overflow-hidden flex flex-col relative border-0 sm:border-8 border-slate-800">
+
+    <!-- Top Status Bar Simulation (Mobile) -->
+    <div class="bg-emerald-800 text-white text-xs px-6 py-2 flex justify-between items-center z-50">
+      <span class="font-semibold">9:41</span>
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <i class="fa-solid fa-battery-full text-xs"></i>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="flex-1 overflow-y-auto pb-20 relative bg-emerald-50/30">
+
+      <!-- SCREEN 1: HALAMAN AWAL (SCAN BARCODE) -->
+      <section id="screen-1" class="screen-view active p-6 flex flex-col items-center justify-between h-full min-h-[700px]">
+        <div class="text-center mt-4">
+          <div class="inline-flex items-center justify-center p-3 bg-emerald-100 rounded-full mb-3 text-emerald-600">
+            <i class="fa-solid fa-leaf text-2xl"></i>
+          </div>
+          <h1 class="text-2xl font-bold text-emerald-900">Tumbler Rewards</h1>
+          <p class="text-sm text-emerald-600 mt-1">Bawa Tumbler, Dapet Minuman Gratis</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl shadow-lg border-2 border-emerald-200 text-center w-full max-w-xs my-auto">
+          <div class="border-4 border-dashed border-emerald-400 rounded-2xl p-6 relative flex flex-col items-center justify-center bg-emerald-50/50">
+            <i class="fa-solid fa-qrcode text-8xl text-emerald-700 mb-3 animate-pulse"></i>
+            <span class="font-bold text-emerald-900 text-lg">Scan Barcode</span>
+            <span class="text-xs text-emerald-600">di Kantin Kampus</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-4">Scan QR Code di meja pedagang kantin untuk mulai</p>
+        </div>
+
+        <button onclick="goToScreen(2)" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg transition duration-200 flex items-center justify-center gap-2">
+          <span>Simulasikan Scan QR</span>
+          <i class="fa-solid fa-arrow-right text-sm"></i>
+        </button>
+      </section>
+
+      <!-- SCREEN 2: ISI NAMA & NIM -->
+      <section id="screen-2" class="screen-view p-6">
+        <button onclick="goToScreen(1)" class="text-emerald-700 hover:text-emerald-900 mb-4 inline-flex items-center gap-1 text-sm font-semibold">
+          <i class="fa-solid fa-chevron-left"></i> Kembali
+        </button>
+
+        <div class="text-center mb-6">
+          <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-3">
+            <i class="fa-solid fa-bottle-water text-2xl"></i>
+          </div>
+          <h2 class="text-xl font-bold text-slate-800">Masukkan Data Diri</h2>
+          <p class="text-xs text-slate-500 mt-1">Untuk melanjutkan program, masukkan nama dan NIM kamu.</p>
+        </div>
+
+        <form onsubmit="handleScreen2Submit(event)" class="space-y-4 bg-white p-5 rounded-3xl shadow-sm border border-emerald-100">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                <i class="fa-solid fa-user text-sm"></i>
+              </span>
+              <input type="text" id="user-name" required placeholder="Contoh: Andi Pratama" class="w-full pl-9 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-slate-800">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">NIM</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                <i class="fa-solid fa-id-card text-sm"></i>
+              </span>
+              <input type="text" id="user-nim" required placeholder="Contoh: 2210245" class="w-full pl-9 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-slate-800">
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200 mt-4">
+            Lanjut ke Verifikasi
+          </button>
+        </form>
+
+        <p class="text-[10px] text-slate-400 text-center mt-4">Data ini digunakan untuk verifikasi pembelian minuman menggunakan tumbler.</p>
+      </section>
+
+      <!-- SCREEN 3: VERIFIKASI PEMBELIAN -->
+      <section id="screen-3" class="screen-view p-6">
+        <button onclick="goToScreen(2)" class="text-emerald-700 hover:text-emerald-900 mb-4 inline-flex items-center gap-1 text-sm font-semibold">
+          <i class="fa-solid fa-chevron-left"></i> Kembali
+        </button>
+
+        <h2 class="text-xl font-bold text-slate-800 mb-1">Verifikasi Pembelian</h2>
+        <p class="text-xs text-slate-500 mb-4">Unggah foto pembelian minuman dengan tumbler dan lampirkan card stempel pembelian.</p>
+
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 mb-4">
+          <label class="block text-xs font-bold text-slate-700 mb-2">Foto Tumbler & Pembelian</label>
+          <div class="border-2 border-dashed border-emerald-300 rounded-xl p-4 text-center bg-emerald-50/30">
+            <img id="preview-img" src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=400&q=80" class="w-full h-36 object-cover rounded-lg mb-2 shadow-sm">
+            <span class="text-xs text-emerald-700 font-semibold block">Foto Pembelian Siap</span>
+            <span class="text-[10px] text-slate-400">Pastikan foto jelas dan stempel sesuai</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 mb-6">
+          <label class="block text-xs font-bold text-slate-700 mb-2">Card Stempel Digital</label>
+          <div class="flex justify-around items-center py-2 bg-slate-50 rounded-xl border border-slate-200">
+            <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md border-2 border-emerald-200">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md border-2 border-emerald-200">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold text-lg border-2 border-dashed border-emerald-400 animate-pulse">
+              3
+            </div>
+          </div>
+        </div>
+
+        <button onclick="claimCoins()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200">
+          Klaim Koin Sekarang
+        </button>
+      </section>
+
+      <!-- SCREEN 4: AMBIL KOIN (SUCCESS) -->
+      <section id="screen-4" class="screen-view p-6 text-center flex flex-col items-center justify-center min-h-[650px]">
+        <div class="w-24 h-24 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center text-5xl mb-4 shadow-inner border-4 border-amber-300 animate-bounce">
+          <i class="fa-solid fa-coins"></i>
+        </div>
+        <h2 class="text-3xl font-extrabold text-emerald-900 mb-1">Yeay!</h2>
+        <p class="text-lg font-semibold text-slate-700 mb-6">Kamu mendapatkan <span class="text-amber-500 font-bold">+15 Koin</span></p>
+
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 w-full mb-6">
+          <p class="text-xs font-bold text-slate-600 mb-3">Stiker Lucu Baru Didapatkan!</p>
+          <div class="flex justify-center gap-3">
+            <span class="text-3xl p-2 bg-emerald-50 rounded-xl border border-emerald-200">🌱</span>
+            <span class="text-3xl p-2 bg-emerald-50 rounded-xl border border-emerald-200">🐼</span>
+            <span class="text-3xl p-2 bg-emerald-50 rounded-xl border border-emerald-200">🥤</span>
+          </div>
+        </div>
+
+        <div class="bg-emerald-100/60 p-3 rounded-xl border border-emerald-200 text-emerald-800 text-xs mb-6 w-full">
+          <strong>Koinmu sudah bertambah!</strong> Kumpulkan terus untuk mendapatkan hadiah menarik.
+        </div>
+
+        <button onclick="goToScreen(5)" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200">
+          Lihat Beranda (Dashboard)
+        </button>
+      </section>
+
+      <!-- SCREEN 5: BERANDA / DASHBOARD -->
+      <section id="screen-5" class="screen-view p-5 space-y-4">
+        <!-- Header Profile -->
+        <div class="flex items-center gap-3 bg-white p-3.5 rounded-2xl shadow-sm border border-emerald-100">
+          <div class="w-10 h-10 bg-emerald-700 text-white rounded-full flex items-center justify-center font-bold">
+            <i class="fa-solid fa-user-graduate"></i>
+          </div>
+          <div class="flex-1">
+            <h3 id="display-name" class="font-bold text-sm text-slate-800">Andi Pratama</h3>
+            <p id="display-nim" class="text-xs text-slate-500">NIM 2210245</p>
+          </div>
+          <button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-gear"></i></button>
+        </div>
+
+        <!-- Coin Balance Box -->
+        <div class="bg-emerald-800 text-white p-5 rounded-3xl shadow-lg relative overflow-hidden">
+          <div class="absolute -right-4 -bottom-4 opacity-10 text-9xl">
+            <i class="fa-solid fa-coins"></i>
+          </div>
+          <span class="text-xs font-medium text-emerald-200">Total Koin</span>
+          <div class="flex items-center gap-2 my-1">
+            <i class="fa-solid fa-coins text-amber-400 text-2xl"></i>
+            <span id="coin-count" class="text-3xl font-bold">35</span>
+            <span class="text-xs text-emerald-300">/ 100 Poin Kupon</span>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="w-full bg-emerald-950/50 h-3 rounded-full mt-3 overflow-hidden p-0.5 border border-emerald-600/30">
+            <div id="progress-bar" class="bg-amber-400 h-full rounded-full transition-all duration-500" style="width: 35%;"></div>
+          </div>
+          <p class="text-[10px] text-emerald-200 mt-2">Kumpulkan 65 poin lagi untuk dapatkan kupon minuman gratis!</p>
+        </div>
+
+        <!-- Quick Menu Grid -->
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="openModal('modal-history')" class="bg-white p-4 rounded-2xl border border-emerald-100 text-left shadow-sm hover:border-emerald-300 transition">
+            <div class="w-8 h-8 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center mb-2">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+            <span class="block text-xs font-bold text-slate-800">Riwayat Koin</span>
+            <span class="text-[10px] text-slate-500">+35 koin bulan ini</span>
+          </button>
+
+          <button onclick="openModal('modal-stickers')" class="bg-white p-4 rounded-2xl border border-emerald-100 text-left shadow-sm hover:border-emerald-300 transition">
+            <div class="w-8 h-8 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center mb-2">
+              <i class="fa-solid fa-icons"></i>
+            </div>
+            <span class="block text-xs font-bold text-slate-800">Koleksi Stiker</span>
+            <span class="text-[10px] text-slate-500">8 Stiker Terkumpul</span>
+          </button>
+        </div>
+
+        <!-- Claim Coupon Banner -->
+        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-4 rounded-2xl flex items-center justify-between shadow-md">
+          <div>
+            <span class="font-bold text-sm block">Kupon Minuman Gratis</span>
+            <span class="text-[10px] text-emerald-100">Koin mencukupi untuk ditukar</span>
+          </div>
+          <button onclick="goToScreen(6)" class="bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-xs py-2 px-4 rounded-xl shadow transition">
+            Ambil Kupon
+          </button>
+        </div>
+      </section>
+
+      <!-- SCREEN 6: KUPON HADIAH & CARA PENGGUNAAN -->
+      <section id="screen-6" class="screen-view p-5 space-y-4">
+        <button onclick="goToScreen(5)" class="text-emerald-700 hover:text-emerald-900 mb-2 inline-flex items-center gap-1 text-sm font-semibold">
+          <i class="fa-solid fa-chevron-left"></i> Beranda
+        </button>
+
+        <h2 class="text-xl font-bold text-slate-800">Kupon Hadiah</h2>
+
+        <!-- Coupon Voucher Ticket -->
+        <div class="bg-emerald-800 text-white p-5 rounded-3xl shadow-lg text-center relative border-2 border-emerald-600">
+          <div class="inline-flex items-center justify-center w-12 h-12 bg-white/10 rounded-full mb-2">
+            <i class="fa-solid fa-mug-hot text-amber-300 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-bold">Kupon Minuman Gratis</h3>
+          <p class="text-xs text-emerald-200 mt-0.5">Kode: <span class="font-mono bg-emerald-900 px-2 py-1 rounded text-amber-300 font-bold">TBGF-3X20</span></p>
+
+          <div class="bg-white p-3 rounded-2xl my-4 inline-block shadow-inner">
+            <i class="fa-solid fa-qrcode text-9xl text-slate-800"></i>
+          </div>
+
+          <p class="text-[10px] text-emerald-200">Berlaku sampai 30 Apr 2026</p>
+        </div>
+
+        <button onclick="alert('Kupon berhasil diklaim dan siap digunakan!')" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200">
+          Tunjukkan ke Pedagang
+        </button>
+
+        <!-- Usage Instructions -->
+        <div class="bg-white p-4 rounded-2xl border border-emerald-100 shadow-sm">
+          <h4 class="font-bold text-xs text-slate-800 mb-2">Cara Penggunaan:</h4>
+          <ol class="text-xs text-slate-600 space-y-2 list-decimal list-inside">
+            <li>Tunjukkan kode QR / kupon ke pedagang kantin.</li>
+            <li>Pedagang akan melakukan verifikasi kode.</li>
+            <li>Nikmati minuman gratis kamu!</li>
+          </ol>
+        </div>
+
+        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-center">
+          <span class="text-xs text-emerald-800 font-medium block"><i class="fa-solid fa-store mr-1"></i> Pedagang Terpartisipasi</span>
+          <a href="#" onclick="alert('Menampilkan daftar 12 stand kantin yang berpartisipasi.')" class="text-[11px] text-emerald-600 underline font-semibold">Lihat Daftar Kantin</a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- BOTTOM NAVBAR (DASHBOARD ONLY) -->
+    <nav class="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-6 py-3 flex justify-around items-center z-40">
+      <button onclick="goToScreen(5)" class="flex flex-col items-center text-emerald-700">
+        <i class="fa-solid fa-house text-lg"></i>
+        <span class="text-[10px] font-medium">Beranda</span>
+      </button>
+      <button onclick="openModal('modal-history')" class="flex flex-col items-center text-slate-400 hover:text-emerald-700">
+        <i class="fa-solid fa-clock-rotate-left text-lg"></i>
+        <span class="text-[10px] font-medium">Riwayat</span>
+      </button>
+      <button onclick="openModal('modal-stickers')" class="flex flex-col items-center text-slate-400 hover:text-emerald-700">
+        <i class="fa-solid fa-icons text-lg"></i>
+        <span class="text-[10px] font-medium">Koleksi</span>
+      </button>
+      <button onclick="goToScreen(2)" class="flex flex-col items-center text-slate-400 hover:text-emerald-700">
+        <i class="fa-solid fa-user text-lg"></i>
+        <span class="text-[10px] font-medium">Profil</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- MODAL: HISTORY -->
+  <div id="modal-history" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl p-5 w-full max-w-xs shadow-xl">
+      <div class="flex justify-between items-center mb-3">
+        <h4 class="font-bold text-sm text-slate-800">Riwayat Perolehan Koin</h4>
+        <button onclick="closeModal('modal-history')" class="text-slate-400"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="space-y-2 text-xs">
+        <div class="flex justify-between py-2 border-b border-slate-100">
+          <span>Kantin Gedung A</span>
+          <span class="font-bold text-emerald-600">+15 Koin</span>
+        </div>
+        <div class="flex justify-between py-2 border-b border-slate-100">
+          <span>Kantin Perpustakaan</span>
+          <span class="font-bold text-emerald-600">+10 Koin</span>
+        </div>
+        <div class="flex justify-between py-2 border-b border-slate-100">
+          <span>Bonus Pengguna Baru</span>
+          <span class="font-bold text-emerald-600">+10 Koin</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: STICKERS -->
+  <div id="modal-stickers" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl p-5 w-full max-w-xs shadow-xl text-center">
+      <div class="flex justify-between items-center mb-3">
+        <h4 class="font-bold text-sm text-slate-800">Koleksi Stiker Eco Kampus</h4>
+        <button onclick="closeModal('modal-stickers')" class="text-slate-400"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="grid grid-cols-4 gap-2 text-2xl p-2 bg-slate-50 rounded-2xl">
+        <span class="p-2 bg-white rounded-xl shadow-sm">🌱</span>
+        <span class="p-2 bg-white rounded-xl shadow-sm">🐼</span>
+        <span class="p-2 bg-white rounded-xl shadow-sm">🥤</span>
+        <span class="p-2 bg-white rounded-xl shadow-sm">🌿</span>
+        <span class="p-2 bg-white rounded-xl shadow-sm">🐢</span>
+        <span class="p-2 bg-white rounded-xl shadow-sm">♻️</span>
+        <span class="p-2 bg-white rounded-xl shadow-sm">🌍</span>
+        <span class="p-2 bg-white rounded-xl shadow-sm">✨</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let userData = {
+      name: "Andi Pratama",
+      nim: "2210245",
+      coins: 35
+    };
+
+    function goToScreen(screenNumber) {
+      document.querySelectorAll('.screen-view').forEach(screen => {
+        screen.classList.remove('active');
+      });
+      document.getElementById(`screen-${screenNumber}`).classList.add('active');
+    }
+
+    function handleScreen2Submit(e) {
+      e.preventDefault();
+      const nameInput = document.getElementById('user-name').value;
+      const nimInput = document.getElementById('user-nim').value;
+      
+      if(nameInput) userData.name = nameInput;
+      if(nimInput) userData.nim = nimInput;
+
+      document.getElementById('display-name').innerText = userData.name;
+      document.getElementById('display-nim').innerText = "NIM " + userData.nim;
+
+      goToScreen(3);
+    }
+
+    function claimCoins() {
+      userData.coins += 15;
+      document.getElementById('coin-count').innerText = userData.coins;
+      document.getElementById('progress-bar').style.width = `${Math.min(userData.coins, 100)}%`;
+      
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      goToScreen(4);
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

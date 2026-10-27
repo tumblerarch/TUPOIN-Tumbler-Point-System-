@@ -13,10 +13,10 @@
       background-color: #f0fdf4;
     }
     .screen-view {
-      display: none;
+      display: none !important;
     }
     .screen-view.active {
-      display: block;
+      display: block !important;
     }
   </style>
 </head>
@@ -28,14 +28,14 @@
     <!-- AREA KONTEN UTAMA -->
     <div class="flex-1 overflow-y-auto pb-20 relative bg-emerald-50/20">
 
-      <!-- SCREEN 1: ISI NAMA & NIM (LANGSUNG SAAT SCAN QR) -->
+      <!-- SCREEN 1: ISI NAMA LENGKAP & NIM -->
       <section id="screen-1" class="screen-view active p-6">
         <div class="text-center mt-2 mb-6">
           <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
             <i class="fa-solid fa-bottle-water text-3xl"></i>
           </div>
           <h2 class="text-xl font-bold text-slate-800">Masukkan Data Diri</h2>
-          <p class="text-xs text-slate-500 mt-1">Untuk melanjutkan program loyalty tumbler, masukkan nama dan NIM kamu.</p>
+          <p class="text-xs text-slate-500 mt-1">Untuk melanjutkan program loyalty tumbler, masukkan nama lengkap dan NIM kamu.</p>
         </div>
 
         <form onsubmit="handleScreen1Submit(event)" class="space-y-4 bg-white p-5 rounded-3xl shadow-sm border border-emerald-100">
@@ -45,7 +45,7 @@
               <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
                 <i class="fa-solid fa-user text-sm"></i>
               </span>
-              <input type="text" id="user-name" required placeholder="Contoh: Azmi Pratama" class="w-full pl-9 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-slate-800">
+              <input type="text" id="user-name" required placeholder="Masukkan Nama Lengkap Anda" class="w-full pl-9 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-slate-800">
             </div>
           </div>
 
@@ -55,9 +55,9 @@
               <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
                 <i class="fa-solid fa-id-card text-sm"></i>
               </span>
-              <input type="text" id="user-nim" required placeholder="Contoh: 230612600579" class="w-full pl-9 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-slate-800">
+              <input type="text" id="user-nim" required placeholder="Contoh: 123456789012" class="w-full pl-9 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-slate-800">
             </div>
-            <p id="nim-error" class="text-[11px] text-red-500 mt-1 hidden">NIM harus berupa 11 sampai 13 angka!</p>
+            <p id="nim-error" class="text-[11px] text-red-500 mt-1 hidden">NIM harus berupa 11 sampai 13 angka digit!</p>
           </div>
 
           <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200 mt-2">
@@ -68,19 +68,19 @@
         <div class="mt-5 p-3.5 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-start gap-2.5">
           <i class="fa-solid fa-shield-halved text-emerald-700 text-base mt-0.5"></i>
           <p class="text-[11px] text-emerald-900 leading-tight">
-            <strong>Kerahasiaan Data Terjamin:</strong> Data diri dan NIM yang Anda masukkan hanya digunakan untuk kebutuhan verifikasi internal transaksi loyalty tumbler di kantin kampus dan tidak akan disebarluaskan.
+            <strong>Kerahasiaan Data Terjamin:</strong> Data diri dan NIM yang Anda masukkan hanya digunakan untuk verifikasi internal loyalty tumbler di kantin kampus dan tidak akan disebarluaskan.
           </p>
         </div>
       </section>
 
-      <!-- SCREEN 2: VERIFIKASI PEMBELIAN & UNGGAH FOTO (TUMBLER & CARD STEMPEL FISIK) -->
+      <!-- SCREEN 2: VERIFIKASI UNGGAH FOTO & STEMPEL URUT -->
       <section id="screen-2" class="screen-view p-6">
         <button onclick="goToScreen(1)" class="text-emerald-700 hover:text-emerald-900 mb-4 inline-flex items-center gap-1 text-sm font-semibold">
           <i class="fa-solid fa-chevron-left"></i> Kembali
         </button>
 
         <h2 class="text-xl font-bold text-slate-800 mb-1">Verifikasi Pembelian</h2>
-        <p class="text-xs text-slate-500 mb-4">Unggah foto tumbler asli dan foto card stempel fisik yang didapat dari petugas kantin.</p>
+        <p class="text-xs text-slate-500 mb-4">Unggah foto tumbler asli dan foto card stempel fisik dari petugas kantin.</p>
 
         <!-- 1. Unggah Foto Tumbler Asli -->
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 mb-4">
@@ -118,18 +118,19 @@
           <p id="card-photo-error" class="text-[11px] text-red-500 mt-1 hidden">Wajib mengunggah foto card stempel fisik dari kantin!</p>
         </div>
 
-        <!-- 3. Pilih Nomor Pembelian Stempel Card (1-5) -->
+        <!-- 3. Nomor Pembelian Stempel Urut -->
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 mb-6">
           <label class="block text-xs font-bold text-slate-700 mb-1">3. Nomor Pembelian Pada Stempel Card</label>
-          <p class="text-[10px] text-slate-500 mb-3">Pilih nomor urut stempel pada card fisik Anda saat ini (1 s/d 5):</p>
+          <p class="text-[10px] text-slate-500 mb-3">Sistem secara otomatis mengunci nomor yang sudah pernah Anda klaim sebelumnya:</p>
           
           <div class="grid grid-cols-5 gap-1.5 py-1">
-            <button type="button" onclick="selectStamp(1)" id="stamp-1" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600">1</button>
-            <button type="button" onclick="selectStamp(2)" id="stamp-2" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600">2</button>
-            <button type="button" onclick="selectStamp(3)" id="stamp-3" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600">3</button>
-            <button type="button" onclick="selectStamp(4)" id="stamp-4" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600">4</button>
-            <button type="button" onclick="selectStamp(5)" id="stamp-5" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600">5</button>
+            <button type="button" id="stamp-1" onclick="selectStamp(1)" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-400 cursor-not-allowed">1</button>
+            <button type="button" id="stamp-2" onclick="selectStamp(2)" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-400 cursor-not-allowed">2</button>
+            <button type="button" id="stamp-3" onclick="selectStamp(3)" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-400 cursor-not-allowed">3</button>
+            <button type="button" id="stamp-4" onclick="selectStamp(4)" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-400 cursor-not-allowed">4</button>
+            <button type="button" id="stamp-5" onclick="selectStamp(5)" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-400 cursor-not-allowed">5</button>
           </div>
+          <p id="stamp-info-msg" class="text-[10px] font-semibold text-emerald-700 mt-2 text-center"></p>
         </div>
 
         <button onclick="processVerification()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200">
@@ -137,7 +138,7 @@
         </button>
       </section>
 
-      <!-- SCREEN 3: KLAIM KOIN BERHASIL -->
+      <!-- SCREEN 3: KLAIM KOIN BERHASIL ("YEAY!") -->
       <section id="screen-3" class="screen-view p-6 text-center flex flex-col items-center justify-center min-h-[600px]">
         <div class="w-24 h-24 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center text-5xl mb-4 shadow-inner border-4 border-amber-300 animate-bounce">
           <i class="fa-solid fa-coins"></i>
@@ -145,12 +146,24 @@
         <h2 class="text-3xl font-extrabold text-emerald-900 mb-1">Yeay!</h2>
         <p class="text-lg font-semibold text-slate-700 mb-6">Kamu mendapatkan <span class="text-amber-500 font-bold">+10 Koin</span></p>
 
+        <!-- Bagian Stiker Yang Dapat Di-Download -->
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 w-full mb-6">
-          <p class="text-xs font-bold text-slate-600 mb-3">Stiker Lucu Baru Didapatkan!</p>
-          <div class="flex justify-center gap-3">
-            <span class="text-3xl p-2 bg-emerald-50 rounded-xl border border-emerald-200">🌱</span>
-            <span class="text-3xl p-2 bg-emerald-50 rounded-xl border border-emerald-200">🐼</span>
-            <span class="text-3xl p-2 bg-emerald-50 rounded-xl border border-emerald-200">🥤</span>
+          <p class="text-xs font-bold text-slate-700 mb-1">Stiker Eco Lucu Baru Didapatkan!</p>
+          <p class="text-[10px] text-slate-400 mb-3">Klik tombol di bawah gambar untuk menyimpan stiker ke HP kamu:</p>
+          
+          <div class="grid grid-cols-3 gap-3">
+            <div class="flex flex-col items-center p-2 bg-emerald-50 rounded-xl border border-emerald-200">
+              <img id="sticker-1-img" src="https://api.iconify.design/noto:sprout.svg" class="w-12 h-12 mb-2">
+              <a href="https://api.iconify.design/noto:sprout.svg" download="Stiker_Tunas_Kampus.svg" target="_blank" class="text-[10px] bg-emerald-700 text-white px-2 py-1 rounded-md font-bold hover:bg-emerald-800"><i class="fa-solid fa-download mr-1"></i>Simpan</a>
+            </div>
+            <div class="flex flex-col items-center p-2 bg-emerald-50 rounded-xl border border-emerald-200">
+              <img id="sticker-2-img" src="https://api.iconify.design/noto:panda.svg" class="w-12 h-12 mb-2">
+              <a href="https://api.iconify.design/noto:panda.svg" download="Stiker_Panda_Kampus.svg" target="_blank" class="text-[10px] bg-emerald-700 text-white px-2 py-1 rounded-md font-bold hover:bg-emerald-800"><i class="fa-solid fa-download mr-1"></i>Simpan</a>
+            </div>
+            <div class="flex flex-col items-center p-2 bg-emerald-50 rounded-xl border border-emerald-200">
+              <img id="sticker-3-img" src="https://api.iconify.design/noto:cup-with-straw.svg" class="w-12 h-12 mb-2">
+              <a href="https://api.iconify.design/noto:cup-with-straw.svg" download="Stiker_Tumbler_Kampus.svg" target="_blank" class="text-[10px] bg-emerald-700 text-white px-2 py-1 rounded-md font-bold hover:bg-emerald-800"><i class="fa-solid fa-download mr-1"></i>Simpan</a>
+            </div>
           </div>
         </div>
 
@@ -171,8 +184,8 @@
             <i class="fa-solid fa-user-graduate"></i>
           </div>
           <div class="flex-1">
-            <h3 id="display-name" class="font-bold text-sm text-slate-800">Azmi</h3>
-            <p id="display-nim" class="text-xs text-slate-500">NIM 230612600579</p>
+            <h3 id="display-name" class="font-bold text-sm text-slate-800">-</h3>
+            <p id="display-nim" class="text-xs text-slate-500">NIM -</p>
           </div>
           <button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-gear"></i></button>
         </div>
@@ -307,37 +320,45 @@
     </div>
   </div>
 
-  <!-- MODAL: STICKERS -->
+  <!-- MODAL: STICKERS DENGAN TOMBOL DOWNLOAD -->
   <div id="modal-stickers" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-3xl p-5 w-full max-w-xs shadow-xl text-center">
-      <div class="flex justify-between items-center mb-3">
-        <h4 class="font-bold text-sm text-slate-800">Koleksi Stiker Eco Kampus</h4>
+      <div class="flex justify-between items-center mb-3 border-b pb-2">
+        <h4 class="font-bold text-sm text-slate-800">Koleksi Stiker WA Eco Kampus</h4>
         <button onclick="closeModal('modal-stickers')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div class="grid grid-cols-4 gap-2 text-2xl p-2 bg-slate-50 rounded-2xl">
-        <span class="p-2 bg-white rounded-xl shadow-sm">🌱</span>
-        <span class="p-2 bg-white rounded-xl shadow-sm">🐼</span>
-        <span class="p-2 bg-white rounded-xl shadow-sm">🥤</span>
-        <span class="p-2 bg-white rounded-xl shadow-sm">🌿</span>
-        <span class="p-2 bg-white rounded-xl shadow-sm">🐢</span>
-        <span class="p-2 bg-white rounded-xl shadow-sm">♻️</span>
-        <span class="p-2 bg-white rounded-xl shadow-sm">🌍</span>
-        <span class="p-2 bg-white rounded-xl shadow-sm">✨</span>
+      <div class="grid grid-cols-2 gap-3 max-h-60 overflow-y-auto p-1">
+        <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 flex flex-col items-center">
+          <img src="https://api.iconify.design/noto:sprout.svg" class="w-10 h-10 mb-1">
+          <a href="https://api.iconify.design/noto:sprout.svg" download="Stiker_Tunas.svg" target="_blank" class="text-[9px] bg-emerald-700 text-white px-2 py-0.5 rounded font-bold">Unduh PNG</a>
+        </div>
+        <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 flex flex-col items-center">
+          <img src="https://api.iconify.design/noto:panda.svg" class="w-10 h-10 mb-1">
+          <a href="https://api.iconify.design/noto:panda.svg" download="Stiker_Panda.svg" target="_blank" class="text-[9px] bg-emerald-700 text-white px-2 py-0.5 rounded font-bold">Unduh PNG</a>
+        </div>
+        <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 flex flex-col items-center">
+          <img src="https://api.iconify.design/noto:cup-with-straw.svg" class="w-10 h-10 mb-1">
+          <a href="https://api.iconify.design/noto:cup-with-straw.svg" download="Stiker_Tumbler.svg" target="_blank" class="text-[9px] bg-emerald-700 text-white px-2 py-0.5 rounded font-bold">Unduh PNG</a>
+        </div>
+        <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 flex flex-col items-center">
+          <img src="https://api.iconify.design/noto:herb.svg" class="w-10 h-10 mb-1">
+          <a href="https://api.iconify.design/noto:herb.svg" download="Stiker_Daun.svg" target="_blank" class="text-[9px] bg-emerald-700 text-white px-2 py-0.5 rounded font-bold">Unduh PNG</a>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    // State Aplikasi
+    // Membaca State Tersimpan dari LocalStorage HP
     let userData = {
-      name: "Azmi",
-      nim: "230612600579",
-      coins: 0,
+      name: localStorage.getItem('tupoin_name') || "",
+      nim: localStorage.getItem('tupoin_nim') || "",
+      coins: parseInt(localStorage.getItem('tupoin_coins')) || 0,
+      claimedCount: parseInt(localStorage.getItem('tupoin_claimed_count')) || 0, // Berapa kali sudah stempel (0-5)
       selectedStamp: 1,
       hasUploadedTumbler: false,
       hasUploadedCard: false,
-      history: [],
-      couponUsed: false
+      history: JSON.parse(localStorage.getItem('tupoin_history')) || []
     };
 
     // Set Tanggal Kedaluwarsa Kupon (+1 Bulan)
@@ -348,6 +369,18 @@
       document.getElementById('expiry-date').innerText = today.toLocaleDateString('id-ID', options);
     }
     setupExpiryDate();
+
+    // Inisialisasi Tampilan
+    window.onload = function() {
+      if(userData.name && userData.nim) {
+        document.getElementById('user-name').value = userData.name;
+        document.getElementById('user-nim').value = userData.nim;
+        document.getElementById('display-name').innerText = userData.name;
+        document.getElementById('display-nim').innerText = "NIM " + userData.nim;
+      }
+      updateStampButtonsUI();
+      updateDashboardUI();
+    };
 
     function goToScreen(screenNumber) {
       document.querySelectorAll('.screen-view').forEach(screen => {
@@ -375,10 +408,47 @@
       userData.name = nameInput;
       userData.nim = nimInput;
 
+      localStorage.setItem('tupoin_name', userData.name);
+      localStorage.setItem('tupoin_nim', userData.nim);
+
       document.getElementById('display-name').innerText = userData.name;
       document.getElementById('display-nim').innerText = "NIM " + userData.nim;
 
+      updateStampButtonsUI();
       goToScreen(2);
+    }
+
+    // Update Tombol Stempel Berdasarkan Urutan Pembelian (1 s/d 5)
+    function updateStampButtonsUI() {
+      const nextStampNumber = userData.claimedCount + 1;
+      const msgEl = document.getElementById('stamp-info-msg');
+
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById(`stamp-${i}`);
+        if (i < nextStampNumber) {
+          // Sudah diklaim di siklus ini
+          btn.className = "stamp-btn py-2.5 rounded-xl border border-emerald-300 font-bold text-xs bg-emerald-100 text-emerald-800 cursor-not-allowed";
+          btn.innerHTML = `<i class="fa-solid fa-check"></i>`;
+          btn.disabled = true;
+        } else if (i === nextStampNumber && nextStampNumber <= 5) {
+          // Stempel aktif berikutnya
+          btn.className = "stamp-btn py-2.5 rounded-xl border-2 border-emerald-600 font-bold text-xs bg-emerald-600 text-white shadow-md animate-pulse cursor-pointer";
+          btn.innerText = i;
+          btn.disabled = false;
+          userData.selectedStamp = i;
+        } else {
+          // Belum waktunya
+          btn.className = "stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-400 cursor-not-allowed";
+          btn.innerText = i;
+          btn.disabled = true;
+        }
+      }
+
+      if (nextStampNumber <= 5) {
+        msgEl.innerText = `Saat ini Anda akan melakukan klaim Stempel Pembelian ke-${nextStampNumber}`;
+      } else {
+        msgEl.innerText = `Anda telah melengkapi 5 stempel! Silakan tukarkan kupon Anda di Beranda.`;
+      }
     }
 
     // Preview Foto Tumbler Asli
@@ -415,18 +485,9 @@
       }
     }
 
-    // Pilih Stempel
     function selectStamp(num) {
       userData.selectedStamp = num;
-      document.querySelectorAll('.stamp-btn').forEach((btn, idx) => {
-        if (idx + 1 === num) {
-          btn.className = "stamp-btn py-2.5 rounded-xl border-2 border-emerald-600 font-bold text-xs bg-emerald-600 text-white shadow-md";
-        } else {
-          btn.className = "stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600";
-        }
-      });
     }
-    selectStamp(1);
 
     // Verifikasi & Tambah Poin (+10 Poin)
     function processVerification() {
@@ -442,22 +503,32 @@
         valid = false;
       }
 
+      if (userData.claimedCount >= 5) {
+        alert("Anda sudah mengumpulkan maksimal 5 stempel! Silakan tukarkan kupon Anda di Beranda sebelum memulai siklus baru.");
+        return;
+      }
+
       if (!valid) return;
 
-      // Tambah 10 Koin per Transaksi (Maks 50 Poin)
-      if (userData.coins < 50) {
-        userData.coins = Math.min(50, userData.coins + 10);
-      }
+      // Update Koin & Stempel Count
+      userData.coins = Math.min(50, userData.coins + 10);
+      userData.claimedCount += 1;
+
+      // Simpan Ke LocalStorage HP
+      localStorage.setItem('tupoin_coins', userData.coins);
+      localStorage.setItem('tupoin_claimed_count', userData.claimedCount);
 
       // Catat ke Riwayat
       const now = new Date();
       const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
       userData.history.unshift({
-        title: `Stempel Fisik #${userData.selectedStamp}`,
+        title: `Stempel Fisik Pembelian #${userData.claimedCount}`,
         points: "+10 Koin",
         time: timeString
       });
+      localStorage.setItem('tupoin_history', JSON.stringify(userData.history));
 
+      updateStampButtonsUI();
       updateDashboardUI();
 
       confetti({
@@ -481,7 +552,9 @@
       const progressPercent = (userData.coins / 50) * 100;
       progressBarEl.style.width = `${progressPercent}%`;
 
-      document.getElementById('history-subtitle').innerText = `${userData.history.length * 10} koin terkumpul`;
+      // Hitung total koin di riwayat
+      const totalAcc = userData.history.reduce((sum, item) => item.points.includes('+') ? sum + 10 : sum, 0);
+      document.getElementById('history-subtitle').innerText = `${totalAcc} koin telah dikumpulkan`;
 
       const historyListEl = document.getElementById('history-list');
       if (userData.history.length > 0) {
@@ -491,21 +564,17 @@
               <span class="font-bold text-slate-700 block">${item.title}</span>
               <span class="text-[10px] text-slate-400">${item.time}</span>
             </div>
-            <span class="font-bold text-emerald-600 text-xs">${item.points}</span>
+            <span class="font-bold ${item.points.includes('+') ? 'text-emerald-600' : 'text-amber-600'} text-xs">${item.points}</span>
           </div>
         `).join('');
       }
 
-      if (userData.coins >= 50 && !userData.couponUsed) {
+      if (userData.coins >= 50) {
         coinInfoText.innerText = "Selamat! Poin kamu sudah mencukupi untuk ditukar kupon minuman gratis.";
         couponStatusText.innerText = "Koin mencukupi untuk ditukar";
         couponStatusText.className = "text-[10px] text-amber-300 font-bold";
         btnClaimCoupon.disabled = false;
         btnClaimCoupon.className = "w-full bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-xs py-2.5 px-4 rounded-xl shadow transition cursor-pointer animate-pulse";
-      } else if (userData.couponUsed) {
-        couponStatusText.innerText = "Kupon telah digunakan bulan ini";
-        btnClaimCoupon.disabled = true;
-        btnClaimCoupon.className = "w-full bg-slate-300 text-slate-500 cursor-not-allowed font-bold text-xs py-2.5 px-4 rounded-xl shadow transition";
       } else {
         const remaining = 50 - userData.coins;
         coinInfoText.innerText = `Kumpulkan ${remaining} poin lagi untuk mendapatkan kupon minuman gratis!`;
@@ -516,25 +585,34 @@
       }
     }
 
-    // Menggunakan Kupon (Reset Koin)
+    // Penukaran Kupon (Sistem Reset Berulang)
     function useCoupon() {
       if (confirm("Apakah Anda yakin ingin menunjukkan & menukarkan kupon ini ke pedagang?")) {
-        alert("Kupon berhasil diverifikasi oleh pedagang! Selamat menikmati minuman gratis kamu 🎉");
+        alert("Kupon berhasil diverifikasi oleh pedagang! Selamat menikmati minuman gratis kamu 🎉\n\nSistem stempel kamu telah di-reset kembali ke Nomor 1 untuk siklus berikutnya.");
         
-        userData.couponUsed = true;
+        // Reset Koin dan Hitungan Stempel ke 0
         userData.coins = 0;
+        userData.claimedCount = 0;
         
+        localStorage.setItem('tupoin_coins', 0);
+        localStorage.setItem('tupoin_claimed_count', 0);
+
+        // Catat Penukaran Kupon ke Riwayat (Riwayat Lama Tetap Ada)
         userData.history.unshift({
           title: "Penukaran Kupon Gratis",
           points: "-50 Koin",
           time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
         });
+        localStorage.setItem('tupoin_history', JSON.stringify(userData.history));
 
+        // Reset Tombol Penukaran
         const btnUse = document.getElementById('btn-use-coupon');
-        btnUse.disabled = true;
-        btnUse.innerText = "Kupon Sudah Digunakan";
-        btnUse.className = "w-full bg-slate-300 text-slate-500 cursor-not-allowed font-bold py-3.5 px-6 rounded-2xl shadow-none";
+        btnUse.disabled = false;
+        btnUse.innerText = "Tunjukkan ke Pedagang & Tukarkan";
+        btnUse.className = "w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200";
 
+        // Perbarui UI ke Siklus Baru
+        updateStampButtonsUI();
         updateDashboardUI();
         goToScreen(4);
       }

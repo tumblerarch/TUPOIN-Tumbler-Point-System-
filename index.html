@@ -18,142 +18,132 @@
     .screen-view.active {
       display: block;
     }
-    .custom-shadow {
-      box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1), 0 8px 10px -6px rgba(16, 185, 129, 0.1);
-    }
   </style>
 </head>
-<body class="flex justify-center items-center min-h-screen bg-slate-100 p-0 sm:p-4">
+<body class="flex justify-center items-start sm:items-center min-h-screen bg-slate-100 p-0 sm:p-4">
 
-  <!-- Mobile Container Wrapper -->
-  <div class="w-full max-w-md bg-white min-h-screen sm:min-h-[844px] sm:h-[844px] sm:rounded-[40px] shadow-2xl overflow-hidden flex flex-col relative border-0 sm:border-8 border-slate-800">
+  <!-- Container Utama Web Mobile -->
+  <div class="w-full max-w-md bg-white min-h-screen sm:min-h-[844px] sm:h-[844px] sm:rounded-[30px] shadow-2xl overflow-hidden flex flex-col relative border-0 sm:border-4 border-slate-300">
 
-    <!-- Top Status Bar Simulation (Mobile) -->
-    <div class="bg-emerald-800 text-white text-xs px-6 py-2 flex justify-between items-center z-50">
-      <span class="font-semibold">9:41</span>
-      <div class="flex items-center gap-2">
-        <i class="fa-solid fa-signal text-[10px]"></i>
-        <i class="fa-solid fa-wifi text-[10px]"></i>
-        <i class="fa-solid fa-battery-full text-xs"></i>
-      </div>
-    </div>
+    <!-- AREA KONTEN UTAMA -->
+    <div class="flex-1 overflow-y-auto pb-20 relative bg-emerald-50/20">
 
-    <!-- MAIN CONTENT AREA -->
-    <div class="flex-1 overflow-y-auto pb-20 relative bg-emerald-50/30">
-
-      <!-- SCREEN 1: HALAMAN AWAL (SCAN BARCODE) -->
-      <section id="screen-1" class="screen-view active p-6 flex flex-col items-center justify-between h-full min-h-[700px]">
-        <div class="text-center mt-4">
-          <div class="inline-flex items-center justify-center p-3 bg-emerald-100 rounded-full mb-3 text-emerald-600">
-            <i class="fa-solid fa-leaf text-2xl"></i>
-          </div>
-          <h1 class="text-2xl font-bold text-emerald-900">Tumbler Rewards</h1>
-          <p class="text-sm text-emerald-600 mt-1">Bawa Tumbler, Dapet Minuman Gratis</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-3xl shadow-lg border-2 border-emerald-200 text-center w-full max-w-xs my-auto">
-          <div class="border-4 border-dashed border-emerald-400 rounded-2xl p-6 relative flex flex-col items-center justify-center bg-emerald-50/50">
-            <i class="fa-solid fa-qrcode text-8xl text-emerald-700 mb-3 animate-pulse"></i>
-            <span class="font-bold text-emerald-900 text-lg">Scan Barcode</span>
-            <span class="text-xs text-emerald-600">di Kantin Kampus</span>
-          </div>
-          <p class="text-xs text-slate-500 mt-4">Scan QR Code di meja pedagang kantin untuk mulai</p>
-        </div>
-
-        <button onclick="goToScreen(2)" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg transition duration-200 flex items-center justify-center gap-2">
-          <span>Simulasikan Scan QR</span>
-          <i class="fa-solid fa-arrow-right text-sm"></i>
-        </button>
-      </section>
-
-      <!-- SCREEN 2: ISI NAMA & NIM -->
-      <section id="screen-2" class="screen-view p-6">
-        <button onclick="goToScreen(1)" class="text-emerald-700 hover:text-emerald-900 mb-4 inline-flex items-center gap-1 text-sm font-semibold">
-          <i class="fa-solid fa-chevron-left"></i> Kembali
-        </button>
-
-        <div class="text-center mb-6">
-          <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-3">
-            <i class="fa-solid fa-bottle-water text-2xl"></i>
+      <!-- SCREEN 1: ISI NAMA & NIM (LANGSUNG SAAT SCAN QR) -->
+      <section id="screen-1" class="screen-view active p-6">
+        <div class="text-center mt-2 mb-6">
+          <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+            <i class="fa-solid fa-bottle-water text-3xl"></i>
           </div>
           <h2 class="text-xl font-bold text-slate-800">Masukkan Data Diri</h2>
-          <p class="text-xs text-slate-500 mt-1">Untuk melanjutkan program, masukkan nama dan NIM kamu.</p>
+          <p class="text-xs text-slate-500 mt-1">Untuk melanjutkan program loyalty tumbler, masukkan nama dan NIM kamu.</p>
         </div>
 
-        <form onsubmit="handleScreen2Submit(event)" class="space-y-4 bg-white p-5 rounded-3xl shadow-sm border border-emerald-100">
+        <form onsubmit="handleScreen1Submit(event)" class="space-y-4 bg-white p-5 rounded-3xl shadow-sm border border-emerald-100">
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap</label>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
                 <i class="fa-solid fa-user text-sm"></i>
               </span>
-              <input type="text" id="user-name" required placeholder="Contoh: Andi Pratama" class="w-full pl-9 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-slate-800">
+              <input type="text" id="user-name" required placeholder="Contoh: Azmi Pratama" class="w-full pl-9 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-slate-800">
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">NIM</label>
+            <label class="block text-xs font-bold text-slate-700 mb-1">NIM (11 - 13 Angka)</label>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
                 <i class="fa-solid fa-id-card text-sm"></i>
               </span>
-              <input type="text" id="user-nim" required placeholder="Contoh: 2210245" class="w-full pl-9 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-slate-800">
+              <input type="text" id="user-nim" required placeholder="Contoh: 230612600579" class="w-full pl-9 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-slate-800">
             </div>
+            <p id="nim-error" class="text-[11px] text-red-500 mt-1 hidden">NIM harus berupa 11 sampai 13 angka!</p>
           </div>
 
-          <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200 mt-4">
+          <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200 mt-2">
             Lanjut ke Verifikasi
           </button>
         </form>
 
-        <p class="text-[10px] text-slate-400 text-center mt-4">Data ini digunakan untuk verifikasi pembelian minuman menggunakan tumbler.</p>
+        <div class="mt-5 p-3.5 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-start gap-2.5">
+          <i class="fa-solid fa-shield-halved text-emerald-700 text-base mt-0.5"></i>
+          <p class="text-[11px] text-emerald-900 leading-tight">
+            <strong>Kerahasiaan Data Terjamin:</strong> Data diri dan NIM yang Anda masukkan hanya digunakan untuk kebutuhan verifikasi internal transaksi loyalty tumbler di kantin kampus dan tidak akan disebarluaskan.
+          </p>
+        </div>
       </section>
 
-      <!-- SCREEN 3: VERIFIKASI PEMBELIAN -->
-      <section id="screen-3" class="screen-view p-6">
-        <button onclick="goToScreen(2)" class="text-emerald-700 hover:text-emerald-900 mb-4 inline-flex items-center gap-1 text-sm font-semibold">
+      <!-- SCREEN 2: VERIFIKASI PEMBELIAN & UNGGAH FOTO (TUMBLER & CARD STEMPEL FISIK) -->
+      <section id="screen-2" class="screen-view p-6">
+        <button onclick="goToScreen(1)" class="text-emerald-700 hover:text-emerald-900 mb-4 inline-flex items-center gap-1 text-sm font-semibold">
           <i class="fa-solid fa-chevron-left"></i> Kembali
         </button>
 
         <h2 class="text-xl font-bold text-slate-800 mb-1">Verifikasi Pembelian</h2>
-        <p class="text-xs text-slate-500 mb-4">Unggah foto pembelian minuman dengan tumbler dan lampirkan card stempel pembelian.</p>
+        <p class="text-xs text-slate-500 mb-4">Unggah foto tumbler asli dan foto card stempel fisik yang didapat dari petugas kantin.</p>
 
+        <!-- 1. Unggah Foto Tumbler Asli -->
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 mb-4">
-          <label class="block text-xs font-bold text-slate-700 mb-2">Foto Tumbler & Pembelian</label>
-          <div class="border-2 border-dashed border-emerald-300 rounded-xl p-4 text-center bg-emerald-50/30">
-            <img id="preview-img" src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=400&q=80" class="w-full h-36 object-cover rounded-lg mb-2 shadow-sm">
-            <span class="text-xs text-emerald-700 font-semibold block">Foto Pembelian Siap</span>
-            <span class="text-[10px] text-slate-400">Pastikan foto jelas dan stempel sesuai</span>
+          <label class="block text-xs font-bold text-slate-700 mb-2">1. Unggah Foto Tumbler Asli</label>
+          
+          <div id="upload-box-tumbler" class="border-2 border-dashed border-emerald-300 rounded-xl p-3 text-center bg-emerald-50/30 relative cursor-pointer hover:bg-emerald-50 transition" onclick="document.getElementById('file-input-tumbler').click()">
+            <input type="file" id="file-input-tumbler" accept="image/*" class="hidden" onchange="previewTumblerImage(event)">
+            
+            <div id="placeholder-tumbler" class="py-2">
+              <i class="fa-solid fa-bottle-water text-3xl text-emerald-600 mb-1"></i>
+              <span class="text-xs text-emerald-800 font-bold block">Pilih / Ambil Foto Tumbler</span>
+              <span class="text-[10px] text-slate-500">Ketuk untuk memilih foto tumbler</span>
+            </div>
+
+            <img id="preview-tumbler-img" src="" class="hidden w-full h-32 object-cover rounded-lg shadow-sm border border-emerald-200">
           </div>
+          <p id="tumbler-photo-error" class="text-[11px] text-red-500 mt-1 hidden">Wajib mengunggah foto tumbler asli!</p>
         </div>
 
+        <!-- 2. Unggah Foto Card Stempel Fisik Kantin -->
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 mb-4">
+          <label class="block text-xs font-bold text-slate-700 mb-2">2. Unggah Foto Card Stempel Fisik Kantin</label>
+          
+          <div id="upload-box-card" class="border-2 border-dashed border-emerald-300 rounded-xl p-3 text-center bg-emerald-50/30 relative cursor-pointer hover:bg-emerald-50 transition" onclick="document.getElementById('file-input-card').click()">
+            <input type="file" id="file-input-card" accept="image/*" class="hidden" onchange="previewCardImage(event)">
+            
+            <div id="placeholder-card" class="py-2">
+              <i class="fa-solid fa-stamp text-3xl text-emerald-600 mb-1"></i>
+              <span class="text-xs text-emerald-800 font-bold block">Pilih / Ambil Foto Card Stempel</span>
+              <span class="text-[10px] text-slate-500">Foto card fisik yang sudah distempel petugas kantin</span>
+            </div>
+
+            <img id="preview-card-img" src="" class="hidden w-full h-32 object-cover rounded-lg shadow-sm border border-emerald-200">
+          </div>
+          <p id="card-photo-error" class="text-[11px] text-red-500 mt-1 hidden">Wajib mengunggah foto card stempel fisik dari kantin!</p>
+        </div>
+
+        <!-- 3. Pilih Nomor Pembelian Stempel Card (1-5) -->
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 mb-6">
-          <label class="block text-xs font-bold text-slate-700 mb-2">Card Stempel Digital</label>
-          <div class="flex justify-around items-center py-2 bg-slate-50 rounded-xl border border-slate-200">
-            <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md border-2 border-emerald-200">
-              <i class="fa-solid fa-check"></i>
-            </div>
-            <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md border-2 border-emerald-200">
-              <i class="fa-solid fa-check"></i>
-            </div>
-            <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold text-lg border-2 border-dashed border-emerald-400 animate-pulse">
-              3
-            </div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">3. Nomor Pembelian Pada Stempel Card</label>
+          <p class="text-[10px] text-slate-500 mb-3">Pilih nomor urut stempel pada card fisik Anda saat ini (1 s/d 5):</p>
+          
+          <div class="grid grid-cols-5 gap-1.5 py-1">
+            <button type="button" onclick="selectStamp(1)" id="stamp-1" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600">1</button>
+            <button type="button" onclick="selectStamp(2)" id="stamp-2" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600">2</button>
+            <button type="button" onclick="selectStamp(3)" id="stamp-3" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600">3</button>
+            <button type="button" onclick="selectStamp(4)" id="stamp-4" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600">4</button>
+            <button type="button" onclick="selectStamp(5)" id="stamp-5" class="stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600">5</button>
           </div>
         </div>
 
-        <button onclick="claimCoins()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200">
-          Klaim Koin Sekarang
+        <button onclick="processVerification()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200">
+          Verifikasi & Klaim Koin
         </button>
       </section>
 
-      <!-- SCREEN 4: AMBIL KOIN (SUCCESS) -->
-      <section id="screen-4" class="screen-view p-6 text-center flex flex-col items-center justify-center min-h-[650px]">
+      <!-- SCREEN 3: KLAIM KOIN BERHASIL -->
+      <section id="screen-3" class="screen-view p-6 text-center flex flex-col items-center justify-center min-h-[600px]">
         <div class="w-24 h-24 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center text-5xl mb-4 shadow-inner border-4 border-amber-300 animate-bounce">
           <i class="fa-solid fa-coins"></i>
         </div>
         <h2 class="text-3xl font-extrabold text-emerald-900 mb-1">Yeay!</h2>
-        <p class="text-lg font-semibold text-slate-700 mb-6">Kamu mendapatkan <span class="text-amber-500 font-bold">+15 Koin</span></p>
+        <p class="text-lg font-semibold text-slate-700 mb-6">Kamu mendapatkan <span class="text-amber-500 font-bold">+10 Koin</span></p>
 
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 w-full mb-6">
           <p class="text-xs font-bold text-slate-600 mb-3">Stiker Lucu Baru Didapatkan!</p>
@@ -164,56 +154,56 @@
           </div>
         </div>
 
-        <div class="bg-emerald-100/60 p-3 rounded-xl border border-emerald-200 text-emerald-800 text-xs mb-6 w-full">
-          <strong>Koinmu sudah bertambah!</strong> Kumpulkan terus untuk mendapatkan hadiah menarik.
+        <div class="bg-emerald-100/60 p-3.5 rounded-xl border border-emerald-200 text-emerald-800 text-xs mb-6 w-full">
+          <strong>Koinmu sudah bertambah!</strong> Kumpulkan hingga 50 poin untuk ditukarkan dengan minuman gratis.
         </div>
 
-        <button onclick="goToScreen(5)" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200">
+        <button onclick="goToScreen(4)" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200">
           Lihat Beranda (Dashboard)
         </button>
       </section>
 
-      <!-- SCREEN 5: BERANDA / DASHBOARD -->
-      <section id="screen-5" class="screen-view p-5 space-y-4">
-        <!-- Header Profile -->
+      <!-- SCREEN 4: BERANDA / DASHBOARD -->
+      <section id="screen-4" class="screen-view p-5 space-y-4">
+        <!-- Profil Pengguna -->
         <div class="flex items-center gap-3 bg-white p-3.5 rounded-2xl shadow-sm border border-emerald-100">
           <div class="w-10 h-10 bg-emerald-700 text-white rounded-full flex items-center justify-center font-bold">
             <i class="fa-solid fa-user-graduate"></i>
           </div>
           <div class="flex-1">
-            <h3 id="display-name" class="font-bold text-sm text-slate-800">Andi Pratama</h3>
-            <p id="display-nim" class="text-xs text-slate-500">NIM 2210245</p>
+            <h3 id="display-name" class="font-bold text-sm text-slate-800">Azmi</h3>
+            <p id="display-nim" class="text-xs text-slate-500">NIM 230612600579</p>
           </div>
           <button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-gear"></i></button>
         </div>
 
-        <!-- Coin Balance Box -->
+        <!-- Total Koin Box (Max 50 Poin) -->
         <div class="bg-emerald-800 text-white p-5 rounded-3xl shadow-lg relative overflow-hidden">
           <div class="absolute -right-4 -bottom-4 opacity-10 text-9xl">
             <i class="fa-solid fa-coins"></i>
           </div>
           <span class="text-xs font-medium text-emerald-200">Total Koin</span>
-          <div class="flex items-center gap-2 my-1">
-            <i class="fa-solid fa-coins text-amber-400 text-2xl"></i>
-            <span id="coin-count" class="text-3xl font-bold">35</span>
-            <span class="text-xs text-emerald-300">/ 100 Poin Kupon</span>
+          <div class="flex items-baseline gap-2 my-1">
+            <i class="fa-solid fa-coins text-amber-400 text-2xl self-center"></i>
+            <span id="coin-count" class="text-3xl font-bold">0</span>
+            <span class="text-xs text-emerald-300">/ 50 Poin Kupon</span>
           </div>
 
-          <!-- Progress Bar -->
+          <!-- Progress Bar (Maksimal 50 Poin) -->
           <div class="w-full bg-emerald-950/50 h-3 rounded-full mt-3 overflow-hidden p-0.5 border border-emerald-600/30">
-            <div id="progress-bar" class="bg-amber-400 h-full rounded-full transition-all duration-500" style="width: 35%;"></div>
+            <div id="progress-bar" class="bg-amber-400 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
           </div>
-          <p class="text-[10px] text-emerald-200 mt-2">Kumpulkan 65 poin lagi untuk dapatkan kupon minuman gratis!</p>
+          <p id="coin-info-text" class="text-[10px] text-emerald-200 mt-2">Kumpulkan 50 poin lagi untuk mendapatkan kupon minuman gratis!</p>
         </div>
 
-        <!-- Quick Menu Grid -->
+        <!-- Menu Pilihan -->
         <div class="grid grid-cols-2 gap-3">
           <button onclick="openModal('modal-history')" class="bg-white p-4 rounded-2xl border border-emerald-100 text-left shadow-sm hover:border-emerald-300 transition">
             <div class="w-8 h-8 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center mb-2">
               <i class="fa-solid fa-clock-rotate-left"></i>
             </div>
             <span class="block text-xs font-bold text-slate-800">Riwayat Koin</span>
-            <span class="text-[10px] text-slate-500">+35 koin bulan ini</span>
+            <span id="history-subtitle" class="text-[10px] text-slate-500">0 koin terkumpul</span>
           </button>
 
           <button onclick="openModal('modal-stickers')" class="bg-white p-4 rounded-2xl border border-emerald-100 text-left shadow-sm hover:border-emerald-300 transition">
@@ -225,28 +215,31 @@
           </button>
         </div>
 
-        <!-- Claim Coupon Banner -->
-        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-4 rounded-2xl flex items-center justify-between shadow-md">
-          <div>
-            <span class="font-bold text-sm block">Kupon Minuman Gratis</span>
-            <span class="text-[10px] text-emerald-100">Koin mencukupi untuk ditukar</span>
+        <!-- Banner Kupon Hadiah -->
+        <div class="bg-gradient-to-r from-emerald-700 to-teal-800 text-white p-4 rounded-2xl shadow-md space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="font-bold text-sm block">Kupon Minuman Gratis</span>
+              <span id="coupon-status-text" class="text-[10px] text-amber-200">Koin belum mencukupi untuk ditukar</span>
+            </div>
           </div>
-          <button onclick="goToScreen(6)" class="bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-xs py-2 px-4 rounded-xl shadow transition">
+          
+          <button id="btn-claim-coupon" onclick="goToScreen(5)" disabled class="w-full bg-slate-300 text-slate-500 cursor-not-allowed font-bold text-xs py-2.5 px-4 rounded-xl shadow transition">
             Ambil Kupon
           </button>
         </div>
       </section>
 
-      <!-- SCREEN 6: KUPON HADIAH & CARA PENGGUNAAN -->
-      <section id="screen-6" class="screen-view p-5 space-y-4">
-        <button onclick="goToScreen(5)" class="text-emerald-700 hover:text-emerald-900 mb-2 inline-flex items-center gap-1 text-sm font-semibold">
-          <i class="fa-solid fa-chevron-left"></i> Beranda
+      <!-- SCREEN 5: KUPON HADIAH & PENGGUNAAN -->
+      <section id="screen-5" class="screen-view p-5 space-y-4">
+        <button onclick="goToScreen(4)" class="text-emerald-700 hover:text-emerald-900 mb-1 inline-flex items-center gap-1 text-sm font-semibold">
+          <i class="fa-solid fa-chevron-left"></i> Kembali ke Beranda
         </button>
 
         <h2 class="text-xl font-bold text-slate-800">Kupon Hadiah</h2>
 
-        <!-- Coupon Voucher Ticket -->
-        <div class="bg-emerald-800 text-white p-5 rounded-3xl shadow-lg text-center relative border-2 border-emerald-600">
+        <!-- Tiket Kupon -->
+        <div id="coupon-card" class="bg-emerald-800 text-white p-5 rounded-3xl shadow-lg text-center relative border-2 border-emerald-600">
           <div class="inline-flex items-center justify-center w-12 h-12 bg-white/10 rounded-full mb-2">
             <i class="fa-solid fa-mug-hot text-amber-300 text-xl"></i>
           </div>
@@ -254,17 +247,19 @@
           <p class="text-xs text-emerald-200 mt-0.5">Kode: <span class="font-mono bg-emerald-900 px-2 py-1 rounded text-amber-300 font-bold">TBGF-3X20</span></p>
 
           <div class="bg-white p-3 rounded-2xl my-4 inline-block shadow-inner">
-            <i class="fa-solid fa-qrcode text-9xl text-slate-800"></i>
+            <i class="fa-solid fa-qrcode text-8xl text-slate-800"></i>
           </div>
 
-          <p class="text-[10px] text-emerald-200">Berlaku sampai 30 Apr 2026</p>
+          <!-- Batas Waktu 1 Bulan -->
+          <p class="text-[11px] text-amber-200 font-medium">Batas Penggunaan: <span id="expiry-date" class="font-bold"></span></p>
+          <p class="text-[9px] text-emerald-300 mt-0.5">*Kupon akan hangus jika lewat dari 1 bulan</p>
         </div>
 
-        <button onclick="alert('Kupon berhasil diklaim dan siap digunakan!')" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200">
-          Tunjukkan ke Pedagang
+        <button id="btn-use-coupon" onclick="useCoupon()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200">
+          Tunjukkan ke Pedagang & Tukarkan
         </button>
 
-        <!-- Usage Instructions -->
+        <!-- Cara Penggunaan -->
         <div class="bg-white p-4 rounded-2xl border border-emerald-100 shadow-sm">
           <h4 class="font-bold text-xs text-slate-800 mb-2">Cara Penggunaan:</h4>
           <ol class="text-xs text-slate-600 space-y-2 list-decimal list-inside">
@@ -273,18 +268,13 @@
             <li>Nikmati minuman gratis kamu!</li>
           </ol>
         </div>
-
-        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-center">
-          <span class="text-xs text-emerald-800 font-medium block"><i class="fa-solid fa-store mr-1"></i> Pedagang Terpartisipasi</span>
-          <a href="#" onclick="alert('Menampilkan daftar 12 stand kantin yang berpartisipasi.')" class="text-[11px] text-emerald-600 underline font-semibold">Lihat Daftar Kantin</a>
-        </div>
       </section>
 
     </div>
 
-    <!-- BOTTOM NAVBAR (DASHBOARD ONLY) -->
+    <!-- BOTTOM NAVBAR -->
     <nav class="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-6 py-3 flex justify-around items-center z-40">
-      <button onclick="goToScreen(5)" class="flex flex-col items-center text-emerald-700">
+      <button onclick="goToScreen(4)" class="flex flex-col items-center text-emerald-700">
         <i class="fa-solid fa-house text-lg"></i>
         <span class="text-[10px] font-medium">Beranda</span>
       </button>
@@ -296,7 +286,7 @@
         <i class="fa-solid fa-icons text-lg"></i>
         <span class="text-[10px] font-medium">Koleksi</span>
       </button>
-      <button onclick="goToScreen(2)" class="flex flex-col items-center text-slate-400 hover:text-emerald-700">
+      <button onclick="goToScreen(1)" class="flex flex-col items-center text-slate-400 hover:text-emerald-700">
         <i class="fa-solid fa-user text-lg"></i>
         <span class="text-[10px] font-medium">Profil</span>
       </button>
@@ -304,26 +294,15 @@
 
   </div>
 
-  <!-- MODAL: HISTORY -->
+  <!-- MODAL: RIWAYAT KOIN -->
   <div id="modal-history" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-3xl p-5 w-full max-w-xs shadow-xl">
-      <div class="flex justify-between items-center mb-3">
+      <div class="flex justify-between items-center mb-3 border-b pb-2">
         <h4 class="font-bold text-sm text-slate-800">Riwayat Perolehan Koin</h4>
-        <button onclick="closeModal('modal-history')" class="text-slate-400"><i class="fa-solid fa-xmark"></i></button>
+        <button onclick="closeModal('modal-history')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div class="space-y-2 text-xs">
-        <div class="flex justify-between py-2 border-b border-slate-100">
-          <span>Kantin Gedung A</span>
-          <span class="font-bold text-emerald-600">+15 Koin</span>
-        </div>
-        <div class="flex justify-between py-2 border-b border-slate-100">
-          <span>Kantin Perpustakaan</span>
-          <span class="font-bold text-emerald-600">+10 Koin</span>
-        </div>
-        <div class="flex justify-between py-2 border-b border-slate-100">
-          <span>Bonus Pengguna Baru</span>
-          <span class="font-bold text-emerald-600">+10 Koin</span>
-        </div>
+      <div id="history-list" class="space-y-2 text-xs max-h-56 overflow-y-auto">
+        <p class="text-slate-400 text-center py-4">Belum ada riwayat transaksi.</p>
       </div>
     </div>
   </div>
@@ -333,7 +312,7 @@
     <div class="bg-white rounded-3xl p-5 w-full max-w-xs shadow-xl text-center">
       <div class="flex justify-between items-center mb-3">
         <h4 class="font-bold text-sm text-slate-800">Koleksi Stiker Eco Kampus</h4>
-        <button onclick="closeModal('modal-stickers')" class="text-slate-400"><i class="fa-solid fa-xmark"></i></button>
+        <button onclick="closeModal('modal-stickers')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="grid grid-cols-4 gap-2 text-2xl p-2 bg-slate-50 rounded-2xl">
         <span class="p-2 bg-white rounded-xl shadow-sm">🌱</span>
@@ -349,11 +328,26 @@
   </div>
 
   <script>
+    // State Aplikasi
     let userData = {
-      name: "Andi Pratama",
-      nim: "2210245",
-      coins: 35
+      name: "Azmi",
+      nim: "230612600579",
+      coins: 0,
+      selectedStamp: 1,
+      hasUploadedTumbler: false,
+      hasUploadedCard: false,
+      history: [],
+      couponUsed: false
     };
+
+    // Set Tanggal Kedaluwarsa Kupon (+1 Bulan)
+    function setupExpiryDate() {
+      const today = new Date();
+      today.setMonth(today.getMonth() + 1);
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      document.getElementById('expiry-date').innerText = today.toLocaleDateString('id-ID', options);
+    }
+    setupExpiryDate();
 
     function goToScreen(screenNumber) {
       document.querySelectorAll('.screen-view').forEach(screen => {
@@ -362,32 +356,188 @@
       document.getElementById(`screen-${screenNumber}`).classList.add('active');
     }
 
-    function handleScreen2Submit(e) {
+    // Submit Identitas & NIM Validasi (11-13 Digit)
+    function handleScreen1Submit(e) {
       e.preventDefault();
-      const nameInput = document.getElementById('user-name').value;
-      const nimInput = document.getElementById('user-nim').value;
-      
-      if(nameInput) userData.name = nameInput;
-      if(nimInput) userData.nim = nimInput;
+      const nameInput = document.getElementById('user-name').value.trim();
+      const nimInput = document.getElementById('user-nim').value.trim();
+      const nimError = document.getElementById('nim-error');
+
+      const isNimValid = /^\d{11,13}$/.test(nimInput);
+
+      if (!isNimValid) {
+        nimError.classList.remove('hidden');
+        return;
+      } else {
+        nimError.classList.add('hidden');
+      }
+
+      userData.name = nameInput;
+      userData.nim = nimInput;
 
       document.getElementById('display-name').innerText = userData.name;
       document.getElementById('display-nim').innerText = "NIM " + userData.nim;
 
-      goToScreen(3);
+      goToScreen(2);
     }
 
-    function claimCoins() {
-      userData.coins += 15;
-      document.getElementById('coin-count').innerText = userData.coins;
-      document.getElementById('progress-bar').style.width = `${Math.min(userData.coins, 100)}%`;
-      
+    // Preview Foto Tumbler Asli
+    function previewTumblerImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById('preview-tumbler-img');
+          img.src = e.target.result;
+          img.classList.remove('hidden');
+          document.getElementById('placeholder-tumbler').classList.add('hidden');
+          document.getElementById('tumbler-photo-error').classList.add('hidden');
+          userData.hasUploadedTumbler = true;
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Preview Foto Card Stempel Fisik Kantin
+    function previewCardImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById('preview-card-img');
+          img.src = e.target.result;
+          img.classList.remove('hidden');
+          document.getElementById('placeholder-card').classList.add('hidden');
+          document.getElementById('card-photo-error').classList.add('hidden');
+          userData.hasUploadedCard = true;
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Pilih Stempel
+    function selectStamp(num) {
+      userData.selectedStamp = num;
+      document.querySelectorAll('.stamp-btn').forEach((btn, idx) => {
+        if (idx + 1 === num) {
+          btn.className = "stamp-btn py-2.5 rounded-xl border-2 border-emerald-600 font-bold text-xs bg-emerald-600 text-white shadow-md";
+        } else {
+          btn.className = "stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-600";
+        }
+      });
+    }
+    selectStamp(1);
+
+    // Verifikasi & Tambah Poin (+10 Poin)
+    function processVerification() {
+      let valid = true;
+
+      if (!userData.hasUploadedTumbler) {
+        document.getElementById('tumbler-photo-error').classList.remove('hidden');
+        valid = false;
+      }
+
+      if (!userData.hasUploadedCard) {
+        document.getElementById('card-photo-error').classList.remove('hidden');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      // Tambah 10 Koin per Transaksi (Maks 50 Poin)
+      if (userData.coins < 50) {
+        userData.coins = Math.min(50, userData.coins + 10);
+      }
+
+      // Catat ke Riwayat
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+      userData.history.unshift({
+        title: `Stempel Fisik #${userData.selectedStamp}`,
+        points: "+10 Koin",
+        time: timeString
+      });
+
+      updateDashboardUI();
+
       confetti({
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 }
       });
 
-      goToScreen(4);
+      goToScreen(3);
+    }
+
+    // Update Tampilan Beranda & Poin
+    function updateDashboardUI() {
+      const coinCountEl = document.getElementById('coin-count');
+      const progressBarEl = document.getElementById('progress-bar');
+      const coinInfoText = document.getElementById('coin-info-text');
+      const couponStatusText = document.getElementById('coupon-status-text');
+      const btnClaimCoupon = document.getElementById('btn-claim-coupon');
+
+      coinCountEl.innerText = userData.coins;
+      const progressPercent = (userData.coins / 50) * 100;
+      progressBarEl.style.width = `${progressPercent}%`;
+
+      document.getElementById('history-subtitle').innerText = `${userData.history.length * 10} koin terkumpul`;
+
+      const historyListEl = document.getElementById('history-list');
+      if (userData.history.length > 0) {
+        historyListEl.innerHTML = userData.history.map(item => `
+          <div class="flex justify-between items-center py-2 border-b border-slate-100">
+            <div>
+              <span class="font-bold text-slate-700 block">${item.title}</span>
+              <span class="text-[10px] text-slate-400">${item.time}</span>
+            </div>
+            <span class="font-bold text-emerald-600 text-xs">${item.points}</span>
+          </div>
+        `).join('');
+      }
+
+      if (userData.coins >= 50 && !userData.couponUsed) {
+        coinInfoText.innerText = "Selamat! Poin kamu sudah mencukupi untuk ditukar kupon minuman gratis.";
+        couponStatusText.innerText = "Koin mencukupi untuk ditukar";
+        couponStatusText.className = "text-[10px] text-amber-300 font-bold";
+        btnClaimCoupon.disabled = false;
+        btnClaimCoupon.className = "w-full bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-xs py-2.5 px-4 rounded-xl shadow transition cursor-pointer animate-pulse";
+      } else if (userData.couponUsed) {
+        couponStatusText.innerText = "Kupon telah digunakan bulan ini";
+        btnClaimCoupon.disabled = true;
+        btnClaimCoupon.className = "w-full bg-slate-300 text-slate-500 cursor-not-allowed font-bold text-xs py-2.5 px-4 rounded-xl shadow transition";
+      } else {
+        const remaining = 50 - userData.coins;
+        coinInfoText.innerText = `Kumpulkan ${remaining} poin lagi untuk mendapatkan kupon minuman gratis!`;
+        couponStatusText.innerText = "Koin belum mencukupi untuk ditukar";
+        couponStatusText.className = "text-[10px] text-amber-200";
+        btnClaimCoupon.disabled = true;
+        btnClaimCoupon.className = "w-full bg-slate-300 text-slate-500 cursor-not-allowed font-bold text-xs py-2.5 px-4 rounded-xl shadow transition";
+      }
+    }
+
+    // Menggunakan Kupon (Reset Koin)
+    function useCoupon() {
+      if (confirm("Apakah Anda yakin ingin menunjukkan & menukarkan kupon ini ke pedagang?")) {
+        alert("Kupon berhasil diverifikasi oleh pedagang! Selamat menikmati minuman gratis kamu 🎉");
+        
+        userData.couponUsed = true;
+        userData.coins = 0;
+        
+        userData.history.unshift({
+          title: "Penukaran Kupon Gratis",
+          points: "-50 Koin",
+          time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+        });
+
+        const btnUse = document.getElementById('btn-use-coupon');
+        btnUse.disabled = true;
+        btnUse.innerText = "Kupon Sudah Digunakan";
+        btnUse.className = "w-full bg-slate-300 text-slate-500 cursor-not-allowed font-bold py-3.5 px-6 rounded-2xl shadow-none";
+
+        updateDashboardUI();
+        goToScreen(4);
+      }
     }
 
     function openModal(id) {

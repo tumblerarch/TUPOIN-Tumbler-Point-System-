@@ -146,23 +146,19 @@
         <h2 class="text-3xl font-extrabold text-emerald-900 mb-1">Yeay!</h2>
         <p class="text-lg font-semibold text-slate-700 mb-6">Kamu mendapatkan <span class="text-amber-500 font-bold">+10 Koin</span></p>
 
-        <!-- Bagian Stiker Yang Dapat Di-Download -->
+        <!-- Bagian Tampilan Stiker Terbaru -->
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 w-full mb-6">
-          <p class="text-xs font-bold text-slate-700 mb-1">Stiker Eco Lucu Baru Didapatkan!</p>
-          <p class="text-[10px] text-slate-400 mb-3">Klik tombol di bawah gambar untuk menyimpan stiker ke HP kamu:</p>
+          <p class="text-xs font-bold text-slate-700 mb-3">Stiker Eco Lucu Terbaru Didapatkan!</p>
           
-          <div class="grid grid-cols-3 gap-3">
-            <div class="flex flex-col items-center p-2 bg-emerald-50 rounded-xl border border-emerald-200">
-              <img id="sticker-1-img" src="https://api.iconify.design/noto:sprout.svg" class="w-12 h-12 mb-2">
-              <a href="https://api.iconify.design/noto:sprout.svg" download="Stiker_Tunas_Kampus.svg" target="_blank" class="text-[10px] bg-emerald-700 text-white px-2 py-1 rounded-md font-bold hover:bg-emerald-800"><i class="fa-solid fa-download mr-1"></i>Simpan</a>
+          <div class="flex justify-center items-center gap-4">
+            <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-200 flex flex-col items-center">
+              <img src="https://api.iconify.design/noto:sprout.svg" class="w-12 h-12">
             </div>
-            <div class="flex flex-col items-center p-2 bg-emerald-50 rounded-xl border border-emerald-200">
-              <img id="sticker-2-img" src="https://api.iconify.design/noto:panda.svg" class="w-12 h-12 mb-2">
-              <a href="https://api.iconify.design/noto:panda.svg" download="Stiker_Panda_Kampus.svg" target="_blank" class="text-[10px] bg-emerald-700 text-white px-2 py-1 rounded-md font-bold hover:bg-emerald-800"><i class="fa-solid fa-download mr-1"></i>Simpan</a>
+            <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-200 flex flex-col items-center">
+              <img src="https://api.iconify.design/noto:panda.svg" class="w-12 h-12">
             </div>
-            <div class="flex flex-col items-center p-2 bg-emerald-50 rounded-xl border border-emerald-200">
-              <img id="sticker-3-img" src="https://api.iconify.design/noto:cup-with-straw.svg" class="w-12 h-12 mb-2">
-              <a href="https://api.iconify.design/noto:cup-with-straw.svg" download="Stiker_Tumbler_Kampus.svg" target="_blank" class="text-[10px] bg-emerald-700 text-white px-2 py-1 rounded-md font-bold hover:bg-emerald-800"><i class="fa-solid fa-download mr-1"></i>Simpan</a>
+            <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-200 flex flex-col items-center">
+              <img src="https://api.iconify.design/noto:cup-with-straw.svg" class="w-12 h-12">
             </div>
           </div>
         </div>
@@ -268,6 +264,15 @@
           <p class="text-[9px] text-emerald-300 mt-0.5">*Kupon akan hangus jika lewat dari 1 bulan</p>
         </div>
 
+        <!-- Peringatan Penting Langsung Ditunjukkan -->
+        <div class="p-3 bg-red-50 rounded-2xl border border-red-200 flex items-start gap-2.5 text-left">
+          <i class="fa-solid fa-circle-exclamation text-red-600 text-base mt-0.5"></i>
+          <div class="text-[11px] text-red-900 leading-tight">
+            <strong>Penting Sebelum Menekan Tombol:</strong>
+            <p class="mt-0.5">Pastikan Anda sudah berada di depan pedagang kantin! Sekali tombol ditekan, kupon akan langsung diklaim dan koin di-reset. Jika tidak langsung ditunjukkan, kupon akan **hangus**.</p>
+          </div>
+        </div>
+
         <button id="btn-use-coupon" onclick="useCoupon()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200">
           Tunjukkan ke Pedagang & Tukarkan
         </button>
@@ -320,29 +325,25 @@
     </div>
   </div>
 
-  <!-- MODAL: STICKERS DENGAN TOMBOL DOWNLOAD -->
+  <!-- MODAL: STICKERS KOLEKSI -->
   <div id="modal-stickers" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-3xl p-5 w-full max-w-xs shadow-xl text-center">
       <div class="flex justify-between items-center mb-3 border-b pb-2">
-        <h4 class="font-bold text-sm text-slate-800">Koleksi Stiker WA Eco Kampus</h4>
+        <h4 class="font-bold text-sm text-slate-800">Koleksi Stiker Eco Kampus</h4>
         <button onclick="closeModal('modal-stickers')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="grid grid-cols-2 gap-3 max-h-60 overflow-y-auto p-1">
-        <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 flex flex-col items-center">
-          <img src="https://api.iconify.design/noto:sprout.svg" class="w-10 h-10 mb-1">
-          <a href="https://api.iconify.design/noto:sprout.svg" download="Stiker_Tunas.svg" target="_blank" class="text-[9px] bg-emerald-700 text-white px-2 py-0.5 rounded font-bold">Unduh PNG</a>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center">
+          <img src="https://api.iconify.design/noto:sprout.svg" class="w-12 h-12">
         </div>
-        <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 flex flex-col items-center">
-          <img src="https://api.iconify.design/noto:panda.svg" class="w-10 h-10 mb-1">
-          <a href="https://api.iconify.design/noto:panda.svg" download="Stiker_Panda.svg" target="_blank" class="text-[9px] bg-emerald-700 text-white px-2 py-0.5 rounded font-bold">Unduh PNG</a>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center">
+          <img src="https://api.iconify.design/noto:panda.svg" class="w-12 h-12">
         </div>
-        <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 flex flex-col items-center">
-          <img src="https://api.iconify.design/noto:cup-with-straw.svg" class="w-10 h-10 mb-1">
-          <a href="https://api.iconify.design/noto:cup-with-straw.svg" download="Stiker_Tumbler.svg" target="_blank" class="text-[9px] bg-emerald-700 text-white px-2 py-0.5 rounded font-bold">Unduh PNG</a>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center">
+          <img src="https://api.iconify.design/noto:cup-with-straw.svg" class="w-12 h-12">
         </div>
-        <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 flex flex-col items-center">
-          <img src="https://api.iconify.design/noto:herb.svg" class="w-10 h-10 mb-1">
-          <a href="https://api.iconify.design/noto:herb.svg" download="Stiker_Daun.svg" target="_blank" class="text-[9px] bg-emerald-700 text-white px-2 py-0.5 rounded font-bold">Unduh PNG</a>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center">
+          <img src="https://api.iconify.design/noto:herb.svg" class="w-12 h-12">
         </div>
       </div>
     </div>
@@ -354,7 +355,7 @@
       name: localStorage.getItem('tupoin_name') || "",
       nim: localStorage.getItem('tupoin_nim') || "",
       coins: parseInt(localStorage.getItem('tupoin_coins')) || 0,
-      claimedCount: parseInt(localStorage.getItem('tupoin_claimed_count')) || 0, // Berapa kali sudah stempel (0-5)
+      claimedCount: parseInt(localStorage.getItem('tupoin_claimed_count')) || 0,
       selectedStamp: 1,
       hasUploadedTumbler: false,
       hasUploadedCard: false,
@@ -426,18 +427,15 @@
       for (let i = 1; i <= 5; i++) {
         const btn = document.getElementById(`stamp-${i}`);
         if (i < nextStampNumber) {
-          // Sudah diklaim di siklus ini
           btn.className = "stamp-btn py-2.5 rounded-xl border border-emerald-300 font-bold text-xs bg-emerald-100 text-emerald-800 cursor-not-allowed";
           btn.innerHTML = `<i class="fa-solid fa-check"></i>`;
           btn.disabled = true;
         } else if (i === nextStampNumber && nextStampNumber <= 5) {
-          // Stempel aktif berikutnya
           btn.className = "stamp-btn py-2.5 rounded-xl border-2 border-emerald-600 font-bold text-xs bg-emerald-600 text-white shadow-md animate-pulse cursor-pointer";
           btn.innerText = i;
           btn.disabled = false;
           userData.selectedStamp = i;
         } else {
-          // Belum waktunya
           btn.className = "stamp-btn py-2.5 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-400 cursor-not-allowed";
           btn.innerText = i;
           btn.disabled = true;
@@ -510,15 +508,12 @@
 
       if (!valid) return;
 
-      // Update Koin & Stempel Count
       userData.coins = Math.min(50, userData.coins + 10);
       userData.claimedCount += 1;
 
-      // Simpan Ke LocalStorage HP
       localStorage.setItem('tupoin_coins', userData.coins);
       localStorage.setItem('tupoin_claimed_count', userData.claimedCount);
 
-      // Catat ke Riwayat
       const now = new Date();
       const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
       userData.history.unshift({
@@ -552,7 +547,6 @@
       const progressPercent = (userData.coins / 50) * 100;
       progressBarEl.style.width = `${progressPercent}%`;
 
-      // Hitung total koin di riwayat
       const totalAcc = userData.history.reduce((sum, item) => item.points.includes('+') ? sum + 10 : sum, 0);
       document.getElementById('history-subtitle').innerText = `${totalAcc} koin telah dikumpulkan`;
 
@@ -585,19 +579,17 @@
       }
     }
 
-    // Penukaran Kupon (Sistem Reset Berulang)
+    // Penukaran Kupon (Langsung Ditunjukkan)
     function useCoupon() {
-      if (confirm("Apakah Anda yakin ingin menunjukkan & menukarkan kupon ini ke pedagang?")) {
+      if (confirm("PERINGATAN: Apakah Anda sedang berada di depan pedagang?\n\nKupon akan langsung ditunjukkan & diklaim sekarang. Jika tidak ditunjukkan sekarang, kupon akan langsung HANGUS dan koin di-reset.")) {
         alert("Kupon berhasil diverifikasi oleh pedagang! Selamat menikmati minuman gratis kamu 🎉\n\nSistem stempel kamu telah di-reset kembali ke Nomor 1 untuk siklus berikutnya.");
         
-        // Reset Koin dan Hitungan Stempel ke 0
         userData.coins = 0;
         userData.claimedCount = 0;
         
         localStorage.setItem('tupoin_coins', 0);
         localStorage.setItem('tupoin_claimed_count', 0);
 
-        // Catat Penukaran Kupon ke Riwayat (Riwayat Lama Tetap Ada)
         userData.history.unshift({
           title: "Penukaran Kupon Gratis",
           points: "-50 Koin",
@@ -605,13 +597,6 @@
         });
         localStorage.setItem('tupoin_history', JSON.stringify(userData.history));
 
-        // Reset Tombol Penukaran
-        const btnUse = document.getElementById('btn-use-coupon');
-        btnUse.disabled = false;
-        btnUse.innerText = "Tunjukkan ke Pedagang & Tukarkan";
-        btnUse.className = "w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition duration-200";
-
-        // Perbarui UI ke Siklus Baru
         updateStampButtonsUI();
         updateDashboardUI();
         goToScreen(4);

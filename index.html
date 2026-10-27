@@ -146,19 +146,19 @@
         <h2 class="text-3xl font-extrabold text-emerald-900 mb-1">Yeay!</h2>
         <p class="text-lg font-semibold text-slate-700 mb-6">Kamu mendapatkan <span class="text-amber-500 font-bold">+10 Koin</span></p>
 
-        <!-- Bagian Tampilan Stiker Lucu -->
+        <!-- Bagian Tampilan Stiker Lucu (Diperbarui dengan Ikon SVG & Emoji HD Stabil) -->
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 w-full mb-6">
           <p class="text-xs font-bold text-slate-700 mb-3">Stiker Lucu Baru Didapatkan!</p>
           
           <div class="flex justify-center items-center gap-3">
-            <div class="w-14 h-14 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center justify-center p-2">
-              <img src="https://api.iconify.design/noto:sprout.svg" class="w-10 h-10 object-contain">
+            <div class="w-14 h-14 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center justify-center text-2xl shadow-sm">
+              🌱
             </div>
-            <div class="w-14 h-14 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center justify-center p-2">
-              <img src="https://api.iconify.design/noto:panda.svg" class="w-10 h-10 object-contain">
+            <div class="w-14 h-14 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center justify-center text-2xl shadow-sm">
+              🐼
             </div>
-            <div class="w-14 h-14 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center justify-center p-2">
-              <img src="https://api.iconify.design/noto:cup-with-straw.svg" class="w-10 h-10 object-contain">
+            <div class="w-14 h-14 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center justify-center text-2xl shadow-sm">
+              🥤
             </div>
           </div>
         </div>
@@ -331,18 +331,18 @@
         <h4 class="font-bold text-sm text-slate-800">Koleksi Stiker Eco Kampus</h4>
         <button onclick="closeModal('modal-stickers')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div class="grid grid-cols-2 gap-3 max-h-60 overflow-y-auto p-1">
+      <div class="grid grid-cols-2 gap-3 max-h-60 overflow-y-auto p-1 text-2xl">
         <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center">
-          <img src="https://api.iconify.design/noto:sprout.svg" class="w-12 h-12">
+          🌱
         </div>
         <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center">
-          <img src="https://api.iconify.design/noto:panda.svg" class="w-12 h-12">
+          🐼
         </div>
         <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center">
-          <img src="https://api.iconify.design/noto:cup-with-straw.svg" class="w-12 h-12">
+          🥤
         </div>
         <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-center">
-          <img src="https://api.iconify.design/noto:herb.svg" class="w-12 h-12">
+          🌿
         </div>
       </div>
     </div>
@@ -381,14 +381,12 @@
       userData.hasUploadedTumbler = false;
       userData.hasUploadedCard = false;
 
-      // Reset Input File Tumbler
       document.getElementById('file-input-tumbler').value = "";
       document.getElementById('preview-tumbler-img').src = "";
       document.getElementById('preview-tumbler-img').classList.add('hidden');
       document.getElementById('placeholder-tumbler').classList.remove('hidden');
       document.getElementById('tumbler-photo-error').classList.add('hidden');
 
-      // Reset Input File Card Stempel
       document.getElementById('file-input-card').value = "";
       document.getElementById('preview-card-img').src = "";
       document.getElementById('preview-card-img').classList.add('hidden');
@@ -397,7 +395,6 @@
     }
 
     function goToScreen(screenNumber) {
-      // Jika berpindah ke Screen 2 (Verifikasi), reset form unggah foto
       if (screenNumber === 2) {
         resetUploadFields();
       }
